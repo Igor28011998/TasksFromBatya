@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -12,9 +13,118 @@ using System.Threading.Tasks;
 
 namespace Calc
 {
+    class LakeCarp
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public double Weight { get; set; }
+        public bool isGold { get; set; }
+        public string Area { get; set; }
+
+    }
+
     class Program
     {
         static void Main(string[] args)
+        {
+            List<LakeCarp> carps = new List<LakeCarp>()
+            {
+                new LakeCarp() { Name = "zibyn", Weight = 12.32, Age = 12, isGold = true, Area="swamp" },
+                new LakeCarp() { Name = "hijame", Weight = 5.2, Age = 33, isGold = false,Area="lake" },
+                new LakeCarp() { Name = "werify", Weight = 43.3, Age = 150, isGold = true, Area="river" },
+                new LakeCarp() { Name = "jadoba", Weight = 38.43, Age = 19, isGold = false, Area="swamp" },
+                new LakeCarp() { Name = "jujun", Weight = 58.73, Age = 14, isGold = false, Area="lake" },
+                new LakeCarp() { Name = "jadoba", Weight = 38.43, Age = 19, isGold = false, Area="river" },
+                new LakeCarp() { Name = "ishish", Weight = 8.43, Age = 5, isGold = true, Area="swamp" },
+                new LakeCarp() { Name = "ururu", Weight = 34.43, Age = 44, isGold = false, Area="lake" },
+                new LakeCarp() { Name = "jamada", Weight = 68.30, Age = 93, isGold = false,Area="river" },
+                new LakeCarp() { Name = "kirkun", Weight = 38.43, Age = 28, isGold = true, Area="swamp" },
+            };
+
+            List<string> checkingOnNullWithLinq1 = new List<string> { };
+            if (checkingOnNullWithLinq1.Count == 0)
+            {
+                Console.WriteLine("Пустой");
+            }
+            else
+            {
+                Console.WriteLine("Не пустой");
+            }
+
+
+            List<string> checkingOnNullWithLinq2 = new List<string> { };
+            if (!checkingOnNullWithLinq2.Any())
+            {
+                Console.WriteLine("Пустой");
+            }
+            else
+            {
+                Console.WriteLine("Не пустой");
+            }
+
+
+            var containsAdInName = carps.Where(n => n.Name.Contains("ad") & n.Name != null);
+            foreach (var i in containsAdInName)
+            {
+
+                Console.WriteLine($"{i.Name} {i.Age}");
+            }
+
+            
+            var amountOfCarpsYoungerThenAvgAge = carps.Where(a => a.Age < carps.Average(a => a.Age)).Count();
+            Console.WriteLine(amountOfCarpsYoungerThenAvgAge);
+
+
+            var areaCarpWeight = carps.GroupBy(p => p.Area).Select(g => new { Area = g.Key, Weight = g.Sum(w => w.Weight) });
+            foreach (var i in areaCarpWeight)
+            {
+                Console.WriteLine(i);
+            }
+
+
+            var carpWeight = carps.GroupBy(p => p.isGold).Select(g => new { isGold = g.Key, Weight = g.Sum(w => w.Weight) });
+            foreach (var i in carpWeight)
+            {
+                Console.WriteLine(i);
+            }
+
+
+            var areal = carps.Select(a => a.Area).Distinct();
+            foreach (var i in areal)
+            {
+                Console.WriteLine(i);
+            }
+
+
+
+            var goldCarpWeight = carps.Where(x => x.isGold == true).Sum(w => w.Weight);
+            Console.WriteLine($"Суммарный вес золотого карася: {goldCarpWeight}");
+
+            var notGoldCarpWeight = carps.Where(x => x.isGold == false).Sum(w => w.Weight);
+            Console.WriteLine($"Суммарный вес серебряного карася: {notGoldCarpWeight}");
+
+
+
+            var lessThen30Years = carps.Where(a => a.Age < 30).OrderByDescending(w => w.Weight).ThenBy(a => a.Age);
+            foreach (var i in lessThen30Years)
+            {
+                Console.WriteLine($"Караси, которые меньше 30кг: {i.Name}");
+            }
+
+            var theOldestCarp = carps.OrderByDescending(x => x.Age).FirstOrDefault();
+            var threeTheFattestCarps = carps.OrderByDescending(w => w.Weight).Take(3);
+            foreach (var i in threeTheFattestCarps)
+            {
+                Console.WriteLine($"Самые жирные караси: {i.Name}, {i.Weight} кг");
+            }
+
+            Console.WriteLine($"Самый старый карась: {theOldestCarp.Name} - {theOldestCarp.Age}");
+
+            Console.Read();
+        }
+
+
+        static void SumOfElementsOfMassive()
         {
             int[] mas = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             int sum = 0;
@@ -23,8 +133,9 @@ namespace Calc
                 sum += item;
             }
             Console.WriteLine(sum);
-            Console.Read();
         }
+
+
         static void SumOfEvenElementsOfMassive()
         {
             int[] mas = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -321,3 +432,4 @@ namespace Calc
         }
     }
 }
+
