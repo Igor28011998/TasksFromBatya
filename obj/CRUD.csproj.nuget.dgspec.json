@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Pasha_Tasks\\CRUD\\CRUD\\CRUD.csproj": {}
+    "E:\\Pasha_Tasks\\TasksFromBatya\\CRUD.csproj": {}
   },
   "projects": {
-    "E:\\Pasha_Tasks\\CRUD\\CRUD\\CRUD.csproj": {
+    "E:\\Pasha_Tasks\\TasksFromBatya\\CRUD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Pasha_Tasks\\CRUD\\CRUD\\CRUD.csproj",
+        "projectUniqueName": "E:\\Pasha_Tasks\\TasksFromBatya\\CRUD.csproj",
         "projectName": "CRUD",
-        "projectPath": "E:\\Pasha_Tasks\\CRUD\\CRUD\\CRUD.csproj",
+        "projectPath": "E:\\Pasha_Tasks\\TasksFromBatya\\CRUD.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "E:\\Pasha_Tasks\\CRUD\\CRUD\\obj\\",
+        "outputPath": "E:\\Pasha_Tasks\\TasksFromBatya\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -42,6 +42,16 @@
         "netcoreapp3.1": {
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.6, )"
             },
